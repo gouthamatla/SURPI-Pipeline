@@ -17,9 +17,9 @@ sed 's/NM:i:\([0-9]\)/0\1/g' $base_name.NT.snap.matched.fulllength.all.annotated
 rm -f  $base_name.NT.snap.matched.fulllength.gi $base_name.NT.snap.matched.fullength.gi.taxonomy
 grep "Viruses;" $base_name.NT.snap.matched.fulllength.all.annotated.sorted > $base_name.NT.snap.matched.fl.Viruses.annotated
 grep "Bacteria;" $base_name.NT.snap.matched.fulllength.all.annotated.sorted > $base_name.NT.snap.matched.fl.Bacteria.annotated
-./ribo_snap_bac_euk.sh $base_name.NT.snap.matched.fl.Bacteria.annotated BAC 32 /storage/goutham/surpi_pipeline/reference/RiboClean_SNAP
+ribo_snap_bac_euk.sh $base_name.NT.snap.matched.fl.Bacteria.annotated BAC 32 /storage/goutham/surpi_pipeline/reference/RiboClean_SNAP
 table_generator.sh $base_name.NT.snap.matched.fl.Viruses.annotated SNAP Y Y Y Y>& $base_name.table_generator_snap.matched.fl.log
 sed "n;n;n;d" $base_name.NT.snap.unmatched.fulllength.fastq | sed "n;n;d" | sed "s/^@/>/g" > $base_name.NT.snap.unmatched.fulllength.fasta
 cat $base_name.NT.snap.unmatched.fulllength.fasta | perl -e 'while (<>) {$h=$_; $s=<>; $seqs{$h}=$s;} foreach $header (reverse sort {length($seqs{$a}) <=> length($seqs{$b})} keys %seqs) {print $header.$seqs{$header}}' > $base_name.NT.snap.unmatched.fulllength.sorted.fasta
 headerid=$(head -1 $base_name.fastq | cut -c1-4 | sed 's/@//g')
-readcount.sh $base_name $headerid Y $base_name.fastq $base_name.preprocessed.fastq $base_name.preprocessed.s20.h250n25d12xfu.human.snap.unmatched.fastq $base_name.NT.snap.matched.fulllength.all.annotated.sorted $base_name.NT.snap.matched.fl.Viruses.annotated $base_name.NT.snap.matched.fl.Bacteria.annotated $base_name.NT.snap.matched.fl.nonChordatEuk.annotated $base_name.NT.snap.unmatched.sam $base_name.Contigs.and.NTunmatched.Viral.RAPSearch.e1.NR.e1.Viruses.annotated
+readcount.sh $base_name $headerid Y $base_name.fastq $base_name.preprocessed.fastq $base_name.preprocessed.s20.h250n25d12xfu.human.snap.unmatched.fastq $base_name.NT.snap.matched.fulllength.all.annotated.sorted $base_name.NT.snap.matched.fl.Viruses.annotated $base_name.NT.snap.matched.fl.Bacteria.annotated $base_name.NT.snap.unmatched.sam 
